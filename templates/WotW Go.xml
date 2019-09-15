@@ -1,0 +1,39 @@
+<templateSet group="WotW Go">
+  <template name="suite" value="import (&#10;    &quot;testing&quot;&#10;    &#10;    . &quot;gopkg.in/check.v1&quot;&#10;)&#10;&#10;func $TOP_TEST$(t *testing.T) { TestingT(t) }&#10;&#10;type $CURRENT_SUITE$ struct {&#10;    $DEFAULT_SUITE$&#10;}&#10;&#10;var _ = Suite(&amp;$CURRENT_SUITE${})&#10;&#10;func (s *$CURRENT_SUITE$) SetUpTest(c *C) {&#10;}&#10;&#10;func (s *$CURRENT_SUITE$) TearDownTest(c *C) {&#10;}" description="Quick suite generation" toReformat="true" toShortenFQNames="true">
+    <variable name="TOP_TEST" expression="concat(&quot;Test&quot;, regularExpression(capitalize(underscoresToCamelCase(fileNameWithoutExtension())), &quot;Test$&quot;, &quot;&quot;))" defaultValue="" alwaysStopAt="false" />
+    <variable name="CURRENT_SUITE" expression="concat(regularExpression(capitalize(underscoresToCamelCase(fileNameWithoutExtension())), &quot;Test$&quot;, &quot;&quot;), &quot;Suite&quot;)" defaultValue="" alwaysStopAt="false" />
+    <variable name="DEFAULT_SUITE" expression="" defaultValue="&quot;BaseSuite&quot;" alwaysStopAt="false" />
+    <context>
+      <option name="GO" value="true" />
+    </context>
+  </template>
+  <template name="ctest" value="func (s *$CURRENT_SUITE$) Test$FUNCTIONNAME$(c *C) {&#10;    $END$&#10;}" description="New test function using Go and Check" toReformat="false" toShortenFQNames="true">
+    <variable name="CURRENT_SUITE" expression="concat(regularExpression(capitalize(underscoresToCamelCase(fileNameWithoutExtension())), &quot;Test$&quot;, &quot;&quot;), &quot;Suite&quot;)" defaultValue="" alwaysStopAt="false" />
+    <variable name="FUNCTIONNAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="GO" value="true" />
+    </context>
+  </template>
+  <template name="rootcmd" value="import (&#10;&#9;&quot;github.com/spf13/cobra&quot;&#10;)&#10;&#10;var PackageVersion = &quot;$VERSION$&quot;&#10;var VerbosityFlagValue int&#10;&#10;func init() {&#10;&#9;$CMD_NAME$.PersistentFlags().CountVarP(&#10;&#9;&#9;&amp;VerbosityFlagValue,&#10;&#9;&#9;&quot;verbose&quot;,&#10;&#9;&#9;&quot;v&quot;,&#10;&#9;&#9;&quot;Increases application verbosity&quot;,&#10;&#9;)&#10;}&#10;&#10;func Execute() error {&#10;&#9;return $CMD_NAME$.Execute()&#10;}&#10;&#10;var $CMD_NAME$ = &amp;cobra.Command{&#10;&#9;Use:     &quot;$BIN_NAME$&quot;,&#10;&#9;Version: PackageVersion,&#10;&#9;Short:   &quot;$SHORT_DESCRIPTION$&quot;,&#10;}" description="Scaffolds the root command of a Cobra project" toReformat="false" toShortenFQNames="true">
+    <variable name="CMD_NAME" expression="concat(capitalize(underscoresToCamelCase(fileNameWithoutExtension())), &quot;Cmd&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="BIN_NAME" expression="regularExpression(fileNameWithoutExtension(), &quot;_&quot;, &quot;-&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="VERSION" expression="" defaultValue="&quot;0.0.0&quot;" alwaysStopAt="true" />
+    <variable name="SHORT_DESCRIPTION" expression="" defaultValue="&quot;wat&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="GO" value="true" />
+    </context>
+  </template>
+  <template name="cassert" value="c.Assert($LEFT$, $CHECKER$, $RIGHT$)" description="Quick assertion for tests" toReformat="false" toShortenFQNames="true">
+    <variable name="LEFT" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CHECKER" expression="" defaultValue="&quot;Equals&quot;" alwaysStopAt="true" />
+    <variable name="RIGHT" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="GO" value="true" />
+    </context>
+  </template>
+  <template name="common_test" value="package main&#10;&#10;import (&#10;&#9;&quot;os&quot;&#10;&#9;&quot;runtime&quot;&#10;&#9;&quot;testing&quot;&#10;&#10;&#9;. &quot;gopkg.in/check.v1&quot;&#10;)&#10;&#10;func Test(t *testing.T) { TestingT(t) }&#10;&#10;type BaseSuite struct {&#10;&#9;workingDirectory        string&#10;&#9;currentFilename         string&#10;&#9;currentWorkingDirectory string&#10;}&#10;&#10;var _ = Suite(&amp;BaseSuite{})&#10;&#10;func (s *BaseSuite) SetUpSuite(c *C) {&#10;&#9;s.currentWorkingDirectory, _ = os.Getwd()&#10;&#9;s.workingDirectory = c.MkDir()&#10;&#9;_ = os.Chdir(s.workingDirectory)&#10;&#9;_, s.currentFilename, _, _ = runtime.Caller(0)&#10;}&#10;&#10;func (s *BaseSuite) TearDownSuite(c *C) {&#10;&#9;_ = os.Chdir(s.currentWorkingDirectory)&#10;}&#10;" description="Scaffolds testing" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="GO" value="true" />
+    </context>
+  </template>
+</templateSet>

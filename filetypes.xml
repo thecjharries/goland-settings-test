@@ -1,0 +1,12 @@
+<application>
+  <component name="FileTypeManager" version="17">
+    <extensionMap>
+      <mapping pattern="xprofile" type="Bash" />
+      <mapping pattern="*.js.flow" type="Flow" />
+      <mapping pattern="*.js.flow" type="Flow" />
+      <mapping pattern="i3/config" type="PLAIN_TEXT" />
+      <mapping pattern="go.mod" type="PLAIN_TEXT" />
+      <mapping pattern="config" type="PLAIN_TEXT" />
+    </extensionMap>
+  </component>
+</application>

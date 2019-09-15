@@ -1,0 +1,22 @@
+<code_scheme name="Default" version="173">
+  <option name="SOFT_MARGINS" value="80" />
+  <GoCodeStyleSettings>
+    <option name="ADD_PARENTHESES_FOR_SINGLE_IMPORT" value="true" />
+    <option name="ADD_LEADING_SPACE_TO_COMMENTS" value="true" />
+    <option name="IMPORT_SORTING" value="GOIMPORTS" />
+    <option name="MOVE_ALL_IMPORTS_IN_ONE_DECLARATION" value="true" />
+    <option name="MOVE_ALL_STDLIB_IMPORTS_IN_ONE_GROUP" value="true" />
+    <option name="GROUP_STDLIB_IMPORTS" value="true" />
+    <option name="GROUP_CURRENT_PROJECT_IMPORTS" value="true" />
+  </GoCodeStyleSettings>
+  <HCL-Terraform>
+    <option name="PROPERTY_ALIGNMENT" value="2" />
+    <option name="PROPERTY_LINE_COMMENTER_CHARACTER" value="1" />
+  </HCL-Terraform>
+  <codeStyleSettings language="HCL">
+    <option name="SPACE_WITHIN_BRACES" value="true" />
+  </codeStyleSettings>
+  <codeStyleSettings language="HCL-Terraform">
+    <option name="SPACE_WITHIN_BRACES" value="true" />
+  </codeStyleSettings>
+</code_scheme>
